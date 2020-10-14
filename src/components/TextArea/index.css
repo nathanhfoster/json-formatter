@@ -1,0 +1,8 @@
+.TextArea {
+  height: 200px;
+  width: 100%;
+  overflow: auto;
+  resize: none;
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
+}

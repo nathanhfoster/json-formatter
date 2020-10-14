@@ -1,0 +1,61 @@
+@import "../node_modules/react-json-pretty/themes/monikai.css";
+
+.__json-pretty__ {
+  overflow: hidden;
+}
+
+:root {
+  --primaryColor: #272822;
+  --secondaryColor: #fd971f;
+  --tertiarycolor: #f92672;
+  --quaternaryColor: #7f8c8d;
+  --quinaryColor: #bdc3c7;
+}
+
+body {
+  background: var(--primaryColor);
+  color: white;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+.App {
+  overflow: hidden;
+  width: 100vw;
+  padding: 40px;
+}
+
+.ShowScrollBar ::-webkit-scrollbar {
+  display: block;
+}
+
+::-webkit-scrollbar {
+  display: block;
+  height: 0.25rem;
+  width: 0.25rem;
+  background-color: transparent;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  transition: 200ms linear;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px var(--grey);
+  background: var(--grey; */
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grey);
+  border-radius: 6px;
+}
