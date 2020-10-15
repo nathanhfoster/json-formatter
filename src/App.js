@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import JSONPretty from 'react-json-pretty'
-import { copyStringToClipboard, downloadObjectAsJson } from 'utils'
+import { copyStringToClipboard, exportJSON, loadJSON } from 'utils'
 import {
   Button,
   CodeEditor,
@@ -46,16 +46,14 @@ const App = () => {
 
   const handleCodeChange = useCallback(({ target: { value } }) => setCode(value), [])
 
-  const loadJSON = useCallback(
+  const handleLoadJSON = useCallback(
     ({
       target: {
         files: { 0: file },
         value,
       },
     }) => {
-      var reader = new FileReader()
-      reader.onload = ({ target: { result } }) => {
-        const json = JSON.parse(result)
+      loadJSON(file).then(json => {
         const formattedJson = getCode(json, code)
         setJSON(json)
         if (formattedJson) {
@@ -63,8 +61,7 @@ const App = () => {
         } else {
           setError(true)
         }
-      }
-      reader.readAsText(file)
+      })
     },
     [code],
   )
@@ -87,7 +84,7 @@ const App = () => {
   }, [formattedJSON])
 
   const exportFormattedJSON = useCallback(() => {
-    downloadObjectAsJson(formattedJSON)
+    exportJSON(formattedJSON)
   }, [formattedJSON])
 
   const [viewableJsonObjects, setViewableJsonObjects] = useState(DEFAULT_JSON_RANGE)
@@ -120,7 +117,7 @@ const App = () => {
         <h2>{`Code Input | length: ${json?.length}`}</h2>
       </Row>
       <Row>
-        <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
+        <Input type='file' accept='.json' onChange={handleLoadJSON} multiple={false} />
       </Row>
       <Row>
         <TextArea value={code} onChange={handleCodeChange} />

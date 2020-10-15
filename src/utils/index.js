@@ -30,14 +30,25 @@ const copyStringToClipboard = s => {
   }
 }
 
-const downloadObjectAsJson = (exportObj, exportName = 'formattedJson') => {
+const exportJSON = (exportObj, name = 'formattedJson') => {
   var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj))
   var downloadAnchorNode = document.createElement('a')
   downloadAnchorNode.setAttribute('href', dataStr)
-  downloadAnchorNode.setAttribute('download', exportName + '.json')
+  downloadAnchorNode.setAttribute('download', name + '.json')
   document.body.appendChild(downloadAnchorNode) // required for firefox
   downloadAnchorNode.click()
   downloadAnchorNode.remove()
 }
 
-export { copyStringToClipboard, downloadObjectAsJson }
+const loadJSON = file =>
+  new Promise((resolve, reject) => {
+    var reader = new FileReader()
+    reader.readAsText(file)
+    reader.onload = ({ target: { result } }) => {
+      const json = JSON.parse(result)
+      return resolve(json)
+    }
+    reader.onerror = error => reject(error)
+  })
+
+export { copyStringToClipboard, exportJSON, loadJSON }
