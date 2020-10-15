@@ -1,6 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "JSON Formatter",
+  "short_name": "JSON Formatter",
+  "description": "Format your JSON files with JavaScript",
+  "author": "Nathan Foster",
+
+  "keywords": ["react", "redux", "pwa", "free", "memo"],
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +22,10 @@
       "sizes": "512x512"
     }
   ],
+  "theme_color": "#272822",
+  "background_color": "#ffffff",
   "start_url": ".",
+  "scope": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait"
 }
