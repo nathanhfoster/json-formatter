@@ -54,7 +54,7 @@ const App = () => {
     reader.readAsText(file)
   }, [])
 
-  const submitCode = useCallback(() => {
+  const applyCode = useCallback(() => {
     setFormattedJSON(prevJSON => {
       const nextJson = getCode(prevJSON, code)
       if (nextJson) {
@@ -94,55 +94,53 @@ const App = () => {
   ])
 
   return (
-    <main className='App'>
-      <Container onScroll={setReachedBottomCallback}>
-        <Row>
-          <header className='App-header'>
-            <h1>JSON Formatter</h1>
-            <p>Use JavaScript to manipulate the JSON file</p>
-          </header>
-        </Row>
-        <Row>
-          <h2 style={{ borderBottom: '2px solid white' }}>Code Input</h2>
-        </Row>
-        <Row>
-          <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
-        </Row>
-        <Row>
-          <Col>
-            <TextArea value={code} onChange={handleCodeChange} />
-            <Col xs={error ? 10 : 12}>
-              <Button onClick={submitCode}>Save</Button>
-              <Button color='#2ecc71' onClick={copyFormattedJSOn}>
-                COPY
-              </Button>
-              <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
-                Export
-              </Button>
-            </Col>
-            {error && (
-              <Col xs={2}>
-                <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
-              </Col>
-            )}
+    <Container className='App' onScroll={setReachedBottomCallback}>
+      <Row>
+        <header className='App-header'>
+          <h1>JSON Formatter</h1>
+          <p>Use JavaScript to manipulate the JSON file</p>
+        </header>
+      </Row>
+      <Row>
+        <h2 style={{ borderBottom: '2px solid white' }}>Code Input</h2>
+      </Row>
+      <Row>
+        <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
+      </Row>
+      <Row>
+        <Col>
+          <TextArea value={code} onChange={handleCodeChange} />
+          <Col xs={error ? 10 : 12}>
+            <Button onClick={applyCode}>APPLY CODE</Button>
+            <Button color='#2ecc71' onClick={copyFormattedJSOn}>
+              COPY JSON
+            </Button>
+            <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
+              EXPORT JSON
+            </Button>
           </Col>
-        </Row>
-        <Row>
-          <h2 style={{ borderBottom: '2px solid white' }}>JSON Output</h2>
-        </Row>
-        <Row>
-          <MemoizedComponent
-            Component={JSONPretty}
-            id='json-pretty'
-            // data={formattedJSON}
-            json={viewableJson}
-            // silent={false}
-            space={1}
-            // onJSONPrettyError={}
-          />
-        </Row>
-      </Container>
-    </main>
+          {error && (
+            <Col xs={2}>
+              <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
+            </Col>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <h2 style={{ borderBottom: '2px solid white' }}>JSON Output</h2>
+      </Row>
+      <Row style={{ height: 'calc(100vh - 115px - 70px - 21px - 90px - 48px - 70px)' }}>
+        <MemoizedComponent
+          Component={JSONPretty}
+          id='json-pretty'
+          // data={formattedJSON}
+          json={viewableJson}
+          // silent={false}
+          space={1}
+          // onJSONPrettyError={}
+        />
+      </Row>
+    </Container>
   )
 }
 

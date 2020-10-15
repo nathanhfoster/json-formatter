@@ -4,6 +4,7 @@ const copyStringToClipboard = s => {
       .writeText(s)
       .then(text => {
         // Success!
+        alert('Copied to clipboard!')
         return text
       })
       .catch(error => {
@@ -24,6 +25,8 @@ const copyStringToClipboard = s => {
     document.execCommand('copy')
     // Remove temporary element
     document.body.removeChild(el)
+
+    alert('Copied to clipboard!')
   }
 }
 
