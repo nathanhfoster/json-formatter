@@ -24,8 +24,9 @@ body {
 
 .App {
   overflow-x: hidden;
-  overflow-y: scroll;
-  max-height: 100vh;
+  min-height: -webkit-fill-available;
+  height: 100vh;
+  width: 100vw;
 }
 
 .ShowScrollBar ::-webkit-scrollbar {
@@ -33,7 +34,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  display: block;
+  display: none;
   height: 0.25rem;
   width: 0.25rem;
   background-color: transparent;

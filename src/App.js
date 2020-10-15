@@ -82,48 +82,50 @@ const App = () => {
   ])
 
   return (
-    <Container className='App' onScroll={setReachedBottomCallback}>
-      <Row>
-        <header className='App-header'>
-          <h1>JSON Formatter</h1>
-          <p>Use JavaScript to manipulate the JSON file</p>
-        </header>
-      </Row>
+    <main className='App'>
+      <Container onScroll={setReachedBottomCallback}>
+        <Row>
+          <header className='App-header'>
+            <h1>JSON Formatter</h1>
+            <p>Use JavaScript to manipulate the JSON file</p>
+          </header>
+        </Row>
 
-      <Row>
-        <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
-      </Row>
-      <Row>
-        <TextArea value={code} onChange={handleCodeChange} />
-      </Row>
-      <Row>
-        <Col xs={error ? 10 : 12}>
-          <Button onClick={submitCode}>Save</Button>
-          <Button color='#2ecc71' onClick={copyFormattedJSOn}>
-            COPY
-          </Button>
-          <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
-            Export
-          </Button>
-        </Col>
-        {error && (
-          <Col xs={2}>
-            <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
+        <Row>
+          <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
+        </Row>
+        <Row>
+          <TextArea value={code} onChange={handleCodeChange} />
+        </Row>
+        <Row>
+          <Col xs={error ? 10 : 12}>
+            <Button onClick={submitCode}>Save</Button>
+            <Button color='#2ecc71' onClick={copyFormattedJSOn}>
+              COPY
+            </Button>
+            <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
+              Export
+            </Button>
           </Col>
-        )}
-      </Row>
-      <Row>
-        <MemoizedComponent
-          Component={JSONPretty}
-          id='json-pretty'
-          // data={formattedJSON}
-          json={viewableJson}
-          // silent={false}
-          space={1}
-          // onJSONPrettyError={}
-        />
-      </Row>
-    </Container>
+          {error && (
+            <Col xs={2}>
+              <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
+            </Col>
+          )}
+        </Row>
+        <Row>
+          <MemoizedComponent
+            Component={JSONPretty}
+            id='json-pretty'
+            // data={formattedJSON}
+            json={viewableJson}
+            // silent={false}
+            space={1}
+            // onJSONPrettyError={}
+          />
+        </Row>
+      </Container>
+    </main>
   )
 }
 
