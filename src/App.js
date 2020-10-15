@@ -108,23 +108,21 @@ const App = () => {
         <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
       </Row>
       <Row>
-        <Col>
-          <TextArea value={code} onChange={handleCodeChange} />
-          <Col xs={error ? 10 : 12}>
-            <Button onClick={applyCode}>APPLY CODE</Button>
-            <Button color='#2ecc71' onClick={copyFormattedJSOn}>
-              COPY JSON
-            </Button>
-            <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
-              EXPORT JSON
-            </Button>
-          </Col>
-          {error && (
-            <Col xs={2}>
-              <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
-            </Col>
-          )}
+        <TextArea value={code} onChange={handleCodeChange} />
+        <Col xs={error ? 10 : 12}>
+          <Button onClick={applyCode}>APPLY CODE</Button>
+          <Button color='#2ecc71' onClick={copyFormattedJSOn}>
+            COPY JSON
+          </Button>
+          <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
+            EXPORT JSON
+          </Button>
         </Col>
+        {error && (
+          <Col xs={2}>
+            <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
+          </Col>
+        )}
       </Row>
       <Row>
         <h2 style={{ borderBottom: '2px solid white' }}>JSON Output</h2>
