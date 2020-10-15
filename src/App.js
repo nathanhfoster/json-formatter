@@ -37,7 +37,8 @@ const getCode = (json, code) => {
 }
 
 const App = () => {
-  const [formattedJSON, setFormattedJSON] = useState(() => getCode(DEFAULT_JSON, DEFAULT_CODE))
+  const [json, setJSON] = useState(() => getCode(DEFAULT_JSON, DEFAULT_CODE))
+  const [formattedJSON, setFormattedJSON] = useState(json)
 
   const [code, setCode] = useState(DEFAULT_CODE)
 
@@ -45,18 +46,32 @@ const App = () => {
 
   const handleCodeChange = useCallback(({ target: { value } }) => setCode(value), [])
 
-  const loadJSON = useCallback(({ target: { files: { 0: file }, value } }) => {
-    var reader = new FileReader()
-    reader.onload = ({ target: { result } }) => {
-      const json = JSON.parse(result)
-      setFormattedJSON(json)
-    }
-    reader.readAsText(file)
-  }, [])
+  const loadJSON = useCallback(
+    ({
+      target: {
+        files: { 0: file },
+        value,
+      },
+    }) => {
+      var reader = new FileReader()
+      reader.onload = ({ target: { result } }) => {
+        const json = JSON.parse(result)
+        const formattedJson = getCode(json, code)
+        setJSON(json)
+        if (formattedJson) {
+          setFormattedJSON(formattedJson)
+        } else {
+          setError(true)
+        }
+      }
+      reader.readAsText(file)
+    },
+    [code],
+  )
 
   const applyCode = useCallback(() => {
     setFormattedJSON(prevJSON => {
-      const nextJson = getCode(prevJSON, code)
+      const nextJson = getCode(json, code)
       if (nextJson) {
         setError(false)
         return nextJson
@@ -65,7 +80,7 @@ const App = () => {
         return prevJSON
       }
     })
-  }, [code])
+  }, [json, code])
 
   const copyFormattedJSOn = useCallback(() => {
     copyStringToClipboard(JSON.stringify(formattedJSON))
@@ -98,11 +113,11 @@ const App = () => {
       <Row>
         <header className='App-header'>
           <h1>JSON Formatter</h1>
-          <p>Use JavaScript to manipulate the JSON file</p>
+          <p style={{ margin: 0 }}>Use JavaScript to manipulate the JSON file</p>
         </header>
       </Row>
       <Row>
-        <h2 style={{ borderBottom: '2px solid white' }}>Code Input</h2>
+        <h2>{`Code Input | length: ${json?.length}`}</h2>
       </Row>
       <Row>
         <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
@@ -125,7 +140,7 @@ const App = () => {
         )}
       </Row>
       <Row>
-        <h2 style={{ borderBottom: '2px solid white' }}>JSON Output</h2>
+        <h2>{`JSON Output | length: ${formattedJSON?.length}`}</h2>
       </Row>
       <Row style={{ height: 'calc(100vh - 115px - 70px - 21px - 90px - 48px - 70px)' }}>
         <MemoizedComponent
