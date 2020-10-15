@@ -5,4 +5,5 @@
   resize: none;
   background-color: var(--primaryColor);
   color: var(--quaternaryColor);
+  padding: 0.25rem 0.5rem;
 }

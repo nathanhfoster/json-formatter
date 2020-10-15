@@ -1,12 +1,24 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import JSONPretty from 'react-json-pretty'
 import { copyStringToClipboard, downloadObjectAsJson } from 'utils'
-import { Button, TextArea, Input, MemoizedComponent, Container, Row, Col } from 'components'
+import {
+  Button,
+  CodeEditor,
+  TextArea,
+  Input,
+  MemoizedComponent,
+  Container,
+  Row,
+  Col,
+} from 'components'
 import { useScrollable } from 'hooks'
 
 const DEFAULT_JSON = [{ id: 'Upload your json file' }]
 
-const DEFAULT_CODE = `.map(e => e)`
+const DEFAULT_CODE = `.reduce((acc, e) => {
+acc.push(e)
+return acc
+}, [])`
 
 const JSON_RENDER_OFFSET = 6
 const DEFAULT_JSON_RANGE = [0, JSON_RENDER_OFFSET * 2]
@@ -75,7 +87,7 @@ const App = () => {
     }
   }, [reachedBottom])
 
-  const viewableJson = useMemo(() => formattedJSON.slice(beginOffset, endOffset), [
+  const viewableJson = useMemo(() => formattedJSON?.slice(beginOffset, endOffset), [
     beginOffset,
     endOffset,
     formattedJSON,
@@ -90,28 +102,33 @@ const App = () => {
             <p>Use JavaScript to manipulate the JSON file</p>
           </header>
         </Row>
-
+        <Row>
+          <h2 style={{ borderBottom: '2px solid white' }}>Code Input</h2>
+        </Row>
         <Row>
           <Input type='file' accept='.json' onChange={loadJSON} multiple={false} />
         </Row>
         <Row>
-          <TextArea value={code} onChange={handleCodeChange} />
+          <Col>
+            <TextArea value={code} onChange={handleCodeChange} />
+            <Col xs={error ? 10 : 12}>
+              <Button onClick={submitCode}>Save</Button>
+              <Button color='#2ecc71' onClick={copyFormattedJSOn}>
+                COPY
+              </Button>
+              <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
+                Export
+              </Button>
+            </Col>
+            {error && (
+              <Col xs={2}>
+                <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
+              </Col>
+            )}
+          </Col>
         </Row>
         <Row>
-          <Col xs={error ? 10 : 12}>
-            <Button onClick={submitCode}>Save</Button>
-            <Button color='#2ecc71' onClick={copyFormattedJSOn}>
-              COPY
-            </Button>
-            <Button color='#e74c3c' onClick={exportFormattedJSON} disabled={error}>
-              Export
-            </Button>
-          </Col>
-          {error && (
-            <Col xs={2}>
-              <h3 style={{ color: '#e74c3c' }}>ERROR!</h3>
-            </Col>
-          )}
+          <h2 style={{ borderBottom: '2px solid white' }}>JSON Output</h2>
         </Row>
         <Row>
           <MemoizedComponent
