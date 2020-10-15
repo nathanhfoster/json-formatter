@@ -1,0 +1,46 @@
+.Container,
+.Container-fluid,
+.Container-sm,
+.Container-md,
+.Container-lg,
+.Container-xl {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .Container,
+  .Container-sm {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .Container,
+  .Container-sm,
+  .Container-md {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .Container,
+  .Container-sm,
+  .Container-md,
+  .Container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Container,
+  .Container-sm,
+  .Container-md,
+  .Container-lg,
+  .Container-xl {
+    max-width: 1140px;
+  }
+}

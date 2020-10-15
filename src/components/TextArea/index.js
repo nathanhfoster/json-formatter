@@ -1,7 +1,8 @@
-import React, { forwardRef } from "react"
-import "./index.css"
+import React, { forwardRef } from 'react'
+import './index.css'
 
-const TextArea = forwardRef((props, ref) => {
-  return <textarea ref={ref} className="TextArea" {...props} />
+const TextArea = forwardRef(({ className, ...textAreaProps }, ref) => {
+  const classN = className ? `TextArea ${className}` : 'TextArea'
+  return <textarea {...textAreaProps} ref={ref} className={classN} />
 })
 export default TextArea

@@ -1,4 +1,4 @@
-@import "../node_modules/react-json-pretty/themes/monikai.css";
+@import '../node_modules/react-json-pretty/themes/monikai.css';
 
 .__json-pretty__ {
   overflow: hidden;
@@ -8,7 +8,7 @@
   --primaryColor: #272822;
   --secondaryColor: #fd971f;
   --tertiarycolor: #f92672;
-  --quaternaryColor: #7f8c8d;
+  --quaternaryColor: #66d9ef;
   --quinaryColor: #bdc3c7;
 }
 
@@ -16,18 +16,16 @@ body {
   background: var(--primaryColor);
   color: white;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 .App {
-  overflow: hidden;
-  width: 100vw;
-  padding: 40px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 100vh;
 }
 
 .ShowScrollBar ::-webkit-scrollbar {
@@ -58,4 +56,12 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--grey);
   border-radius: 6px;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
 }

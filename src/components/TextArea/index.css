@@ -4,5 +4,5 @@
   overflow: auto;
   resize: none;
   background-color: var(--primaryColor);
-  color: var(--secondaryColor);
+  color: var(--quaternaryColor);
 }
