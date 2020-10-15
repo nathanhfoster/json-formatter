@@ -16,8 +16,8 @@ import { useScrollable } from 'hooks'
 const DEFAULT_JSON = [{ id: 'Upload your json file' }]
 
 const DEFAULT_CODE = `.reduce((acc, e) => {
-acc.push(e)
-return acc
+   acc.push(e)
+   return acc
 }, [])`
 
 const JSON_RENDER_OFFSET = 6
