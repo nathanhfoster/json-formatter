@@ -2,7 +2,7 @@
   min-height: 80px;
   width: 100%;
   overflow: auto;
-  resize: none;
+  resize: vertical;
   background-color: var(--primaryColor);
   color: var(--quaternaryColor);
   padding: 0.25rem 0.5rem;
